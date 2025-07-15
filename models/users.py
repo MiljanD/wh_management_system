@@ -1,4 +1,7 @@
+import time
+
 from helper_functions.cryptograph import cipher
+import os
 
 
 
@@ -36,6 +39,8 @@ def login(con, username, password):
             message = "Wrong username and password!"
 
     print(message)
+    time.sleep(3)
+    os.system("cls")
     return is_validated
 
 
