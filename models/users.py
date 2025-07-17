@@ -39,7 +39,7 @@ def login(con, username, password):
             message = "Wrong username and password!"
 
     print(message)
-    time.sleep(3)
+    time.sleep(1.5)
     os.system("cls")
     return is_validated
 

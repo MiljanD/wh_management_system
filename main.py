@@ -18,6 +18,7 @@ while is_running:
         os.system("cls")
         login_credentials = display_login()
         is_login = login(connection, login_credentials["username"], login_credentials["password"])
+
         while is_login:
             os.system("cls")
             action_entry = display_actions()
@@ -25,6 +26,7 @@ while is_running:
                 os.system("cls")
                 wh_operations = display_wh_actions()
                 if wh_operations == "1":
+                    os.system("cls")
                     add_material()
 
             elif action_entry == "4":
