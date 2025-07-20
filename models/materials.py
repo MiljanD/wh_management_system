@@ -30,8 +30,24 @@ def manually_adding(con):
     return {"action": "manual addition", "action_code": 101}
 
 
+def add_from_invoice():
+    pass
 
 
+def show_material_by(con, column_name, criterion):
+    cursor = con.cursor()
+    cursor.execute(f"SELECT * FROM materials WHERE {column_name} = %s", criterion)
+    result = cursor.fetchall()
+
+    cursor.close()
+    return result
 
 
+def edit_material_record(con, mat_id, column_name, new_value):
+    cursor = con.cursor()
+    if column_name == "quantity":
+       new_value = int(new_value)
+    cursor.execute(f"UPDATE materials SET {column_name} = %s WHERE id = %s", (new_value, mat_id))
+    con.commit()
+    cursor.close()
 

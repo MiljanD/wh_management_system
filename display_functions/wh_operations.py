@@ -15,6 +15,6 @@ def display_wh_actions():
     return wh_actions
 
 
-def add_material_display():
+def material_display():
     material_action = display_screen(material_header, mat_buttons, button_padding, entry_message)
     return material_action
