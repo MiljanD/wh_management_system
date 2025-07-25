@@ -1,11 +1,15 @@
 import time
-# from db import connection
 from helper_functions.cryptograph import cipher
 import os
 
 
 
 def register(con):
+    """
+    handles registration of new users
+    :param con: db connection
+
+    """
     username = input("Enter your username: ")
     password = input("Enter your password: ")
     name = input("Enter your first name: ").capitalize()
@@ -22,6 +26,13 @@ def register(con):
 
 
 def login(con, username, password):
+    """
+    handles log in of the user to program
+    :param con: db connection
+    :param username: username credential
+    :param password: password credential
+    :return: user ID
+    """
     cursor = con.cursor()
     cursor.execute("SELECT * FROM users")
     con.commit()
@@ -54,10 +65,19 @@ def login(con, username, password):
 
 
 def logout():
+    """
+    handles the logging out user from program
+    :return: by default returns false
+    """
     return False
 
 
 def show_users(con):
+    """
+    grabs the list of users from database
+    :param con: db connection
+    :return: user data from db
+    """
     cursor = con.cursor()
     cursor.execute("SELECT * FROM users")
     con.commit()
@@ -68,6 +88,12 @@ def show_users(con):
 
 
 def delete_user(con, user_id):
+    """
+    deletes user from db based on user ID
+    :param con: db connection
+    :param user_id: user ID
+
+    """
     cursor = con.cursor()
     cursor.execute("DELETE FROM users WHERE id = %s", user_id)
     con.commit()
@@ -75,6 +101,14 @@ def delete_user(con, user_id):
 
 
 def update_user_info(con, user_id, column_name, new_info):
+    """
+    updates user data in database
+    :param con: db connection
+    :param user_id: user ID
+    :param column_name: name of the column where changes will be done
+    :param new_info: new value that will be entered in db
+
+    """
     cursor = con.cursor()
 
     if column_name == "password":
@@ -83,13 +117,3 @@ def update_user_info(con, user_id, column_name, new_info):
     cursor.execute(f"UPDATE users SET {column_name} = %s WHERE id = %s", (new_info, user_id))
     con.commit()
     cursor.close()
-
-
-
-
-
-# show_users(connection)
-
-
-
-

@@ -7,5 +7,9 @@ button_padding = 5
 entry_message = "CHOSE YOUR ACTION: "
 
 def show_user_actions():
+    """
+    handles the screen for user administration
+    :return: user choice of action
+    """
     actions = display_screen(header, buttons, button_padding, entry_message)
     return actions

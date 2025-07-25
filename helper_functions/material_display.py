@@ -2,6 +2,12 @@ from datetime import date
 
 
 def show_materials(material_list, return_on_stock=False):
+    """
+    way of displaying available materials
+    :param material_list: list of available materials
+    :param return_on_stock: by default is False and able printing of material list
+    :return: just printing desired outcome
+    """
     col_names = []
     for mat in material_list:
         col_names = [key for key, value in mat.items()]
@@ -19,21 +25,30 @@ def show_materials(material_list, return_on_stock=False):
 
 
 def collect_data_edit():
-        mat_id = int(input("\nChose material ID: "))
-        column_criterion = input("Chose column for edit: ")
-        if column_criterion == "date_of_receipt" or column_criterion == "expiration_date":
-            date_value = input("Enter dates in form of YYYY-MM-DD: ")
-            date_list = date_value.split("-")
+    """
+    edit form for correction of already entered data
+    :return: edit data
+    """
+    mat_id = int(input("\nChose material ID: "))
+    column_criterion = input("Chose column for edit: ")
+    if column_criterion == "date_of_receipt" or column_criterion == "expiration_date":
+        date_value = input("Enter dates in form of YYYY-MM-DD: ")
+        date_list = date_value.split("-")
 
-            new_value = date(int(date_list[0]), int(date_list[1]), int(date_list[2]))
+        new_value = date(int(date_list[0]), int(date_list[1]), int(date_list[2]))
 
-        else:
-            new_value = input(f"Enter new value for column {column_criterion}: ")
+    else:
+        new_value = input(f"Enter new value for column {column_criterion}: ")
 
-        return {"mat_id": mat_id, "col_name": column_criterion, "new_value": new_value}
+    return {"mat_id": mat_id, "col_name": column_criterion, "new_value": new_value}
 
 
 def materials_by_exp(material_list):
+    """
+    displays materials sorted by expiration date
+    :param material_list: sorted material list
+    :return: just printing desired outcome
+    """
     for idx, mat in enumerate(material_list):
         print(f"Material ID: {mat["id"]}")
         print(f"Position of material: {mat["position"]}")

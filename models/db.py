@@ -1,5 +1,7 @@
 import pymysql
 
+# establishing connection to the project database
+
 connection = pymysql.connect(
     host="localhost",
     user="root",

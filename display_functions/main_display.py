@@ -6,17 +6,30 @@ UNDERSCORE_SEPARATION = SCREEN_LENGTH * "_"
 
 
 def display_screen(header, buttons, buttons_padding, entry_message, is_login=False):
+    """
+    Function is used to display interface for the client.
+
+    :param header: Title of the active screen
+    :param buttons: Buttons related to certain screen
+    :param buttons_padding: value that will indicate how much buttons will be separated between each other
+    :param entry_message: message to client to choose desired action
+    :param is_login: by default is False and functions displays screen if it is changed to true than login form will be shown
+    :return: user action choice
+    """
+
+    # header of the program
     header_start = (int(SCREEN_LENGTH/2) - int(len(header)/2))
     print(UNDERSCORE_SEPARATION)
     print(f"{' ' * int(BAR_COUNT / 2)} {WELCOME_MESSAGE} {' ' * int(BAR_COUNT / 2)}")
     print(UNDERSCORE_SEPARATION)
 
-
+    # login form
     if is_login:
         username_entry = input(f"Enter username: ")
         password_entry = input(f"Enter password: ")
         user_entry = {"username": username_entry, "password": password_entry}
 
+    # screen display
     else:
         buttons_line = ""
         for idx, button in enumerate(buttons):

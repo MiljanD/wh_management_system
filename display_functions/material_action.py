@@ -8,5 +8,9 @@ button_padding = 5
 entry_message = "CHOSE YOUR ACTION: "
 
 def issue_or_return():
+    """
+    handles the screen for wh actions of issuing and returning materials
+    :return: choice of action
+    """
     actions = display_screen(header, buttons, button_padding, entry_message)
     return actions

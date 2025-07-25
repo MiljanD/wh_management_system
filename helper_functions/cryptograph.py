@@ -7,6 +7,16 @@ CIPHER_KEY = 3
 
 
 def cipher(password, chars=ALPHABET, nums=NUMBERS, special=SPECIAL_CHARS, key=CIPHER_KEY):
+    """
+    allows the storing user passwords as ciphered value
+
+    :param password: user entered value for theirs password
+    :param chars: list of all letters(A-Za-z)
+    :param nums: list of all numbers for 0-10
+    :param special: list of special keys
+    :param key: way on how user entered value will be ciphered
+    :return: crypted value of user entered value
+    """
     ciphered_password = ""
 
     for char in password:

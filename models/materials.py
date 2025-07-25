@@ -4,9 +4,14 @@ from datetime import datetime
 from dateutil.relativedelta import relativedelta
 
 
-# Tasks: ADD MATERIALS: 1. add from inv., ISSUE OR RETURN: 201 and 203, CORRECTIONS:
+
 
 def manually_adding(con):
+    """
+    Manual addition of materials to stock
+    :param con: database connection
+    :return: name of action, code of action which will be used as parameters for add_action function
+    """
     cursor = con.cursor()
     material_name = input("Enter material name: ").upper()
     batch = input("Enter batch of material: ")
@@ -30,11 +35,14 @@ def manually_adding(con):
     return {"action": "manual addition", "action_code": 101}
 
 
-def add_from_invoice():
-    pass
-
-
 def show_material_by(con, column_name, criterion):
+    """
+    displays materials by certain criterion
+    :param con: database connection
+    :param column_name: column name from materials database table
+    :param criterion: material name, batch, ... etc.
+
+    """
     cursor = con.cursor()
     cursor.execute(f"SELECT * FROM materials WHERE {column_name} = %s", criterion)
     result = cursor.fetchall()
@@ -44,6 +52,14 @@ def show_material_by(con, column_name, criterion):
 
 
 def edit_material_record(con, mat_id, column_name, new_value):
+    """
+    responsible for editing existing materials in database
+    :param con: database connection
+    :param mat_id: material id
+    :param column_name: name of the column from materials table
+    :param new_value: new value that will be entered in materials table
+
+    """
     cursor = con.cursor()
     if column_name == "quantity":
        new_value = int(new_value)
@@ -56,6 +72,12 @@ def edit_material_record(con, mat_id, column_name, new_value):
 
 
 def show_mat_by_exp_date(con, mat_name):
+    """
+    responsible for extracting list of materials from db table sorted by expiration date
+    :param con: db connection
+    :param mat_name: material name
+    :return: sorted data from db
+    """
     cursor = con.cursor()
 
     cursor.execute("SELECT * FROM materials WHERE mat_name = %s ORDER BY expiration_date", mat_name)
@@ -67,6 +89,14 @@ def show_mat_by_exp_date(con, mat_name):
 
 
 def issue_material(con, mat_id, qty_to_issue, qty_on_stock):
+    """
+    handles issuing materials to production
+    :param con: db connection
+    :param mat_id: material ID
+    :param qty_to_issue: how much pcs is need to be issued
+    :param qty_on_stock: available qty on stock
+    :return: action name and action code
+    """
     cursor = con.cursor()
     new_qty = qty_on_stock - qty_to_issue
     cursor.execute("UPDATE materials SET quantity = %s WHERE id = %s", (new_qty, mat_id))
@@ -77,6 +107,14 @@ def issue_material(con, mat_id, qty_to_issue, qty_on_stock):
 
 
 def return_on_stock(con, mat_id, new_qty):
+    """
+    handles return of unused qty of materials back to stock
+    if there is certain batch of certain material on stock in wh
+    :param con: db connection
+    :param mat_id: material ID
+    :param new_qty: quantity to return
+    :return: action name and action code
+    """
     cursor = con.cursor()
     cursor.execute("UPDATE materials SET quantity = %s WHERE id = %s", (new_qty, mat_id))
     con.commit()
