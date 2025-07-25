@@ -1,0 +1,10 @@
+Report for date 2025-07-23
+
+Action section:
+Action MANUAL ADDITION is done: 2 times.
+Action ISSUE TO PRODUCTION is done: 3 times.
+Action RETURN ON STOCK is done: 1 times.
+
+User section:
+User Miljana K has done 4 actions.
+User Miljan Duvnjak has done 2 actions.

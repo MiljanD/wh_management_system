@@ -1,16 +1,17 @@
-
+from pathlib import Path
 from display_functions.material_action import issue_or_return
 from helper_functions.material_display import show_materials, collect_data_edit, materials_by_exp
 from helper_functions.user_display import display_user_list
 from models.db import connection
 from models.users import register, login, logout, show_users, delete_user, update_user_info
 from models.materials import manually_adding, show_material_by, edit_material_record, show_mat_by_exp_date, issue_material, return_on_stock
-from models.actions import add_action
+from models.actions import add_action, generate_report
 from display_functions.home import display_home
 from display_functions.login import display_login
 from display_functions.action_form import display_actions
 from display_functions.wh_operations import display_wh_actions, material_display
 from display_functions.user_actions import show_user_actions
+from display_functions.report_display import generate_report_display
 import os
 
 
@@ -94,6 +95,13 @@ while is_running:
 
                     edit_data = collect_data_edit()
                     edit_material_record(connection, edit_data["mat_id"], edit_data["col_name"], edit_data["new_value"])
+
+            elif action_entry == "2":
+                os.system("cls")
+                report = generate_report_display()
+                project_path = Path(__file__).parent
+                generate_report(connection, project_path)
+                input("a")
 
             elif action_entry == "3":
                 os.system("cls")
